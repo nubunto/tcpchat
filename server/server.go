@@ -6,6 +6,7 @@ import (
 	"github.com/nubunto/tcpchat/types"
 	"log"
 	"net"
+	"fmt"
 )
 
 var connections *ConnectionList
@@ -81,7 +82,7 @@ func handle(serverConn Connection, messages chan<- string, errors chan<- error) 
 			errors <- err
 			break
 		} else {
-			messages <- message
+			messages <- fmt.Sprintf("%s-> %s", serverConn.Name, message)
 		}
 		log.Println("Got message:", message)
 	}
